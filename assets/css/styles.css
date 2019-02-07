@@ -1,0 +1,70 @@
+/* Font used: 'Lobster', cursive */
+
+.containerAll{
+    background-image: url('../img/bg.jpg');
+}
+
+.container{
+    width: 600px;
+    margin: 0 auto;
+}
+
+.title{
+    font-size: 34px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    color: #333;
+}
+
+.gameContainer{
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.27);
+
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.gameCard{
+    height: 138px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+/* animation test on hover */
+.gameCard.flipped{
+    transform: rotateY(180deg);
+}
+
+.gameCard:hover .gameCard--face{
+    box-shadow: 5px 5px 6px 0px rgba(0, 0, 0, .5);
+}
+
+.gameCard .gameCard--face{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+
+    transition: all .3s ease-in-out;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.gameCard .gameCard--face.front{
+    transform: rotateY(180deg);
+    background-color: red;
+}
+.gameCard .gameCard--face.back{
+    background-color: #0596c1;
+    z-index: 2;
+}
