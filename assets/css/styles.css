@@ -5,7 +5,7 @@
 }
 
 .container{
-    width: 600px;
+    width: 630px;
     margin: 0 auto;
 }
 
@@ -22,6 +22,7 @@
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.27);
+    box-sizing: border-box;
 
     display: grid;
     grid-gap: 15px;
@@ -32,7 +33,7 @@
     height: 138px;
     cursor: pointer;
     position: relative;
-    transition: all 0.5s ease-in-out;
+    transition: transform .3s ease-in-out;
     transform-style: preserve-3d;
 }
 
@@ -57,14 +58,24 @@
     -moz-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
 
-    transition: all .3s ease-in-out;
+    transition: box-shadow .15s ease-in-out;
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
 }
 .gameCard .gameCard--face.front{
     transform: rotateY(180deg);
-    background-color: red;
+    /* background-color: red; */
 }
 .gameCard .gameCard--face.back{
     background-color: #0596c1;
     z-index: 2;
 }
+
+/* CARDS CLASSES */
+.gameCard.MDAwMQ .gameCard--face.front{ background-color: #b91a1a;}
+.gameCard.MDAwMg .gameCard--face.front{ background-color: #ef7900;}
+.gameCard.MDAwMw .gameCard--face.front{ background-color: #bf0073;}
+.gameCard.MDAwNA .gameCard--face.front{ background-color: #7019d0;}
+.gameCard.MDAwNQ .gameCard--face.front{ background-color: #2226b3;}
+.gameCard.MDAwNg .gameCard--face.front{ background-color: #32a26e;}
+.gameCard.MDAwNw .gameCard--face.front{ background-color: #79bf0a;}
+.gameCard.MDAwOA .gameCard--face.front{ background-color: #cec813;}
