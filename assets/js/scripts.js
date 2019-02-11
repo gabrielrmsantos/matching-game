@@ -1,35 +1,75 @@
+var cardIds = {'11': {}, '12': {}, '13': {}, '14': {}, '21': {}, '22': {}, '23': {}, '24': {}, '31': {}, '32': {}, '33': {}, '34': {}, '41': {}, '42': {}, '43': {}, '44': {}};
 // var cardIds = ['11', '12', '13', '14', '21', '22', '23', '24', '31', '32', '33', '34', '41', '42', '43', '44'];
-// var cardTypes = [
-//     {icon: '', color: '#b91a1a'},
-//     {icon: '', color: '#ef7900'},
-//     {icon: '', color: '#bf0073'},
-//     {icon: '', color: '#7019d0'},
-//     {icon: '', color: '#2226b3'},
-//     {icon: '', color: '#32a26e'},
-//     {icon: '', color: '#79bf0a'},
-//     {icon: '', color: '#cec813'}
-// ];
+
+var cardClasses = [
+    'MDAwMQ', 'MDAwMQ',
+    'MDAwMg', 'MDAwMg',
+    'MDAwMw', 'MDAwMw',
+    'MDAwNA', 'MDAwNA',
+    'MDAwNQ', 'MDAwNQ',
+    'MDAwNg', 'MDAwNg',
+    'MDAwNw', 'MDAwNw',
+    'MDAwOA', 'MDAwOA'
+];
 var flippedCards = [];
 
-// function preparingCards(){
+var verifyingCards = false;
+var movementCounter = 0;
+var sorttedCards = [];
 
-// }
+function preparingCards(){
+    sorttedCards = [];
+    var sorttedCardClasses = cardClasses;
 
-function flipCard(idCard){
-    flippedCards.push(idCard);
-    var currentCard = document.getElementById(idCard);
+    var cardElements = document.getElementsByClassName('gameCard');
 
-    if(currentCard.classList.contains('flipped')){
-        currentCard.classList.remove('flipped');
-    } else{
-        currentCard.classList.add('flipped');
+    var i = 0;
+    while(i < cardElements.length){
+        var index = Math.floor(Math.random() * sorttedCardClasses.length);
+        var filteredCards = sorttedCards.filter(function(value){ return value.class == sorttedCardClasses[index]; });
+
+        if(filteredCards.length < 2){
+            sorttedCards[cardElements[i].id] = { class: sorttedCardClasses[index]};
+            i++;
+        }
     }
-
-    // if(flippedCards.length === 2){
-    //     compareCards();
-    // }
 }
 
-// function compareCards(){
-//     flippedCards = [];
-// }
+function iterateMovementCounter(method){
+    if(method === 'increase')
+        movementCounter++;
+    else if(method === 'reset')
+        movementCounter = 0;
+}
+
+function flipCard(idCard){
+    if(verifyingCards == false){
+        var currentCard = document.getElementById(idCard);
+        if(!currentCard.classList.contains('flipped')){
+            iterateMovementCounter('increase');
+
+            currentCard.classList.add(sorttedCards[idCard].class);
+            currentCard.classList.add('flipped');
+            flippedCards.push(idCard);
+    
+            if(flippedCards.length > 1){
+                verifyingCards = true;
+                setTimeout(function(){
+                    compareCards();
+                }, 600);
+            }
+        }
+    }
+}
+
+function compareCards(){
+    if(sorttedCards[flippedCards[0]].class != sorttedCards[flippedCards[1]].class){
+        document.getElementById(flippedCards[0]).classList.remove('flipped');
+        document.getElementById(flippedCards[1]).classList.remove('flipped');
+    }
+
+    flippedCards = [];    
+    verifyingCards = false;
+}
+
+preparingCards();
